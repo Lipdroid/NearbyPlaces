@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c4c4c4"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/lnlIButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF000000"
+        android:gravity="right"
+        android:orientation="horizontal" >
+
+       <Button
+            android:id="@+id/btn_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="60"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/btn_back_bg" />
+
+        <ImageButton
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="2dp"
+            android:src="@drawable/gplay" />
+
+        <ImageButton
+            android:id="@+id/ibOurProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+             android:padding="2dp"
+            android:src="@drawable/icon_share" />
+
+        <ImageButton
+            android:id="@+id/ibBanglaDua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+           android:padding="2dp"
+            android:src="@drawable/icon_contactus" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#c4c4c4" >
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-1982840936615923/9609534095" >
+        </com.google.android.gms.ads.AdView>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#c4c4c4" >
+    </ListView>
+
+</LinearLayout>

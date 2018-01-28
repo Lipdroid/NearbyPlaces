@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+   android:background="@drawable/listselect">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/item_txtMake"
+        android:padding="5dp"
+        android:src="@drawable/gplay" />
+
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="left"
+        android:paddingTop="5dp"
+        android:src="@drawable/bank" />
+
+    <TextView
+        android:id="@+id/item_txtMake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_toRightOf="@+id/item_icon"
+        android:padding="5dp"
+        android:text="Make Shown Here"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#A2CC4C" />
+
+    <TextView
+        android:id="@+id/item_txtYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/item_txtMake"
+        android:layout_below="@+id/item_txtMake"
+        android:paddingLeft="5dp"
+        android:text="Press to see on map"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFA500" />
+
+    
+
+    
+
+</RelativeLayout>

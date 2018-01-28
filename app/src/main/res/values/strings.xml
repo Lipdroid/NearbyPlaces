@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" translatable="false">LocationNearby</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="menu_settings" translatable="false">Settings</string>
+    <string name="str_btn_find" translatable="false">Find</string>
+
+    <string-array name="place_type_name" translatable="false">
+        <item>Airport</item>
+        <item>ATM</item>
+        <item>Bank</item>
+        <item>Bus Station</item>
+        <item>Church</item>
+        <item>Doctor</item>
+        <item>Hospital</item>
+        <item>Mosque</item>
+        <item>Restaurant</item>
+        <item>Bar</item>
+        <item>Car Repair</item>
+        <item>Departmental Store</item>
+        <item>Fire Stations</item>
+        <item>Food</item>
+        <item>Gas Stations</item>
+        <item>Gym</item>
+        <item>Pollice</item>
+        <item>Post office</item>
+        <item>School</item>
+        <item>Shopping</item>
+        <item>Stadium</item>
+        <item>Store</item>
+        <item>Taxi Stations</item>
+        <item>Train Stations</item>
+        <item>University</item>
+        <item>Zoo</item>
+    </string-array>
+
+    <string name="feedback">Write Your Feedback Here and press Submit</string>
+    <string name="feedbacksubject">If you face any issue or have any suggestion, please do let us know. We will try to address them in the coming versions.</string>
+    <string name="sendfeedback">Submit</string>
+
+</resources>
