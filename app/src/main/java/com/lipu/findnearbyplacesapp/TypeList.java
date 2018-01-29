@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.lipu.findnearbyplacesapp.Permissions.RequestUserPermission;
-import com.lipu.findnearbyplacesapp.R;
-import com.google.android.gms.ads.AdListener;
+import com.lipu.findnearbyplacesapp.permissions.RequestUserPermission;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.lipu.findnearbyplacesapp.utils.CorrectSizeUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,11 +17,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -30,9 +31,11 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,11 +43,14 @@ public class TypeList extends Activity {
 
     private List<Type> googleTypes = new ArrayList<Type>();
     AutoCompleteTextView actv;
-    ListView list;
-    ImageButton search, rate, otherproducts, mail;
+    GridView list;
+    ImageView search;
     PrefsValues m_pPrefsValues;
     boolean is_location_permission_granted = false;
     RequestUserPermission requestUserPermission;
+    private ImageView btn_menu = null;
+    private PopupWindow popupWindow = null;
+    CorrectSizeUtil mCorrectSize = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +66,18 @@ public class TypeList extends Activity {
         } else
             mAdView.setVisibility(View.GONE);
 
+        btn_menu = (ImageView) findViewById(R.id.btn_menu);
+        btn_menu.setVisibility(View.VISIBLE);
 
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //menu btn pressed
+                showPopup(btn_menu);
+            }
+        });
         m_pPrefsValues = new PrefsValues(this);
-        search = (ImageButton) findViewById(R.id.search);
-        rate = (ImageButton) findViewById(R.id.rate);
-        otherproducts = (ImageButton) findViewById(R.id.ibOurProducts);
-        mail = (ImageButton) findViewById(R.id.ibBanglaDua);
+        search = (ImageView) findViewById(R.id.search);
         String[] Types = getResources().getStringArray(R.array.place_type_name);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Types);
         actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
@@ -74,82 +86,6 @@ public class TypeList extends Activity {
         populateCarList();
         populateListView();
         registerClickCallback();
-        mail.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(getApplicationContext(),
-                        Feedback.class);
-                startActivity(intent);
-
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-
-
-            }
-        });
-        otherproducts.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (isNetworkAvailable()) {
-                    try {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Lipdroid")));
-                    } catch (ActivityNotFoundException anfe) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/developer?id=Lipdroid&hl=en")));
-                    }
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(TypeList.this);
-                    builder.setTitle("Information");
-                    builder.setMessage("No Internet Connection!!");
-                    builder.setNegativeButton("ok",
-                            new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // TODO Auto-generated method stub
-                                    dialog.dismiss();
-                                }
-                            });
-                    builder.create();
-                    builder.show();
-                }
-
-            }
-        });
-        rate.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(TypeList.this);
-                builder.setTitle("Rating");
-                builder.setMessage("Rate this Application!");
-                builder.setNegativeButton("OK",
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // TODO Auto-generated method stub
-                                dialog.dismiss();
-                                if (isNetworkAvailable()) {
-                                    Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
-                                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-                                    try {
-                                        startActivity(goToMarket);
-                                    } catch (ActivityNotFoundException e) {
-                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
-                                    }
-                                } else
-                                    Toast.makeText(TypeList.this, "Please Check your internet connection", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                builder.create();
-                builder.show();
-
-            }
-        });
         requestUserPermission = new RequestUserPermission(this);
         is_location_permission_granted = requestUserPermission.verifyStoragePermissions();
         search.setOnClickListener(new OnClickListener() {
@@ -264,6 +200,9 @@ public class TypeList extends Activity {
             }
 
         });
+
+        mCorrectSize = CorrectSizeUtil.getInstance(this);
+        mCorrectSize.correctSize();
     }
 
     private boolean isNetworkAvailable() {
@@ -309,12 +248,12 @@ public class TypeList extends Activity {
 
     private void populateListView() {
         ArrayAdapter<Type> adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.typeListView);
+        GridView list = (GridView) findViewById(R.id.typeListView);
         list.setAdapter(adapter);
     }
 
     private void registerClickCallback() {
-        list = (ListView) findViewById(R.id.typeListView);
+        list = (GridView) findViewById(R.id.typeListView);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -450,5 +389,115 @@ public class TypeList extends Activity {
             }
 
         }
+    }
+
+    /* you should refer to a view to stick your popup wherever u want.
+** e.g. Button button  = (Button) findviewbyId(R.id.btn);
+**     if(popupWindow != null)
+**         showPopup(button);
+**/
+    public void showPopup(View v) {
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.popup_filter_layout, null);
+        TextView rate_app = (TextView) popupView.findViewById(R.id.tv_clear_data);
+        TextView more_apps = (TextView) popupView.findViewById(R.id.tv_add_app);
+        TextView feedback = (TextView) popupView.findViewById(R.id.tv_statistic);
+
+        popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                //TODO do sth here on dismiss
+            }
+        });
+        rate_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //clear all
+                AlertDialog.Builder builder = new AlertDialog.Builder(TypeList.this);
+                builder.setTitle("Rating");
+                builder.setMessage("Rate this Application!");
+                builder.setNegativeButton("OK",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // TODO Auto-generated method stub
+                                dialog.dismiss();
+                                if (isNetworkAvailable()) {
+                                    Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+                                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                                    try {
+                                        startActivity(goToMarket);
+                                    } catch (ActivityNotFoundException e) {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
+                                    }
+                                } else
+                                    Toast.makeText(TypeList.this, "Please Check your internet connection", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                builder.create();
+                builder.show();
+
+
+            }
+        });
+
+        more_apps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //add new app
+                popupWindow.dismiss();
+                if (isNetworkAvailable()) {
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Lipdroid")));
+                    } catch (ActivityNotFoundException anfe) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/developer?id=Lipdroid&hl=en")));
+                    }
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TypeList.this);
+                    builder.setTitle("Information");
+                    builder.setMessage("No Internet Connection!!");
+                    builder.setNegativeButton("ok",
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // TODO Auto-generated method stub
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.create();
+                    builder.show();
+                }
+
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open statictics page
+                popupWindow.dismiss();
+                Intent intent = new Intent(getApplicationContext(),
+                        Feedback.class);
+                startActivity(intent);
+
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+            }
+        });
+
+
+        //new MultipleScreen(mContext).reSizeViewPx(popupView);
+        mCorrectSize.correctSize(popupView);
+
+        popupWindow.showAsDropDown(v);
     }
 }

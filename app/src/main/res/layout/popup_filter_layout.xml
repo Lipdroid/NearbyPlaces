@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="50px"
+    android:background="@drawable/cardview"
+    android:orientation="vertical"
+    android:padding="15px">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="140px"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/campus_tv_badge"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:background="@drawable/badge_circle"
+            android:gravity="center"
+            android:text="11"
+            android:textColor="#FFF"
+            android:textSize="35px"
+            android:tag="30"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_clear_data"
+            android:layout_width="500px"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="44px"
+            android:paddingLeft="20px"
+            android:tag="50"
+            android:text="Rate This App"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/main_dark"
+            android:textSize="50px"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_add_app"
+            android:layout_width="700px"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="44px"
+            android:paddingLeft="20px"
+            android:tag="50"
+            android:text="More Apps of this Developer"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/main_dark"
+            android:textSize="50px"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_statistic"
+            android:layout_width="500px"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="44px"
+            android:paddingLeft="20px"
+            android:tag="50"
+            android:text="Give FeedBack"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/main_dark"
+            android:textSize="50px"
+            android:textStyle="normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="25px" />
+    </LinearLayout>
+</RelativeLayout>

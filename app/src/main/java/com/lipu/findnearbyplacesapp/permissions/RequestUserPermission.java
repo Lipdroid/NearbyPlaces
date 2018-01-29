@@ -1,4 +1,4 @@
-package com.lipu.findnearbyplacesapp.Permissions;
+package com.lipu.findnearbyplacesapp.permissions;
 
 import android.Manifest;
 import android.app.Activity;

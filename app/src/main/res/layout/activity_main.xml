@@ -3,70 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/lnlIButton"
+    <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FF000000"
-        android:gravity="right"
-        android:orientation="horizontal" >
+        android:layout_height="144px"
+        android:background="@color/colorPrimary">
 
-        <Button
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100px"
+            android:tag="50"
+            android:text="@string/app_name"
+            android:textColor="@color/main_dark"
+            android:textSize="50px" />
+
+        <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="60"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/btn_back_bg" />
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:padding="0px"
+            android:src="@drawable/back_icon"
+            android:visibility="visible" />
 
-        <ImageButton
-            android:id="@+id/rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:padding="2dp"
-            android:src="@drawable/gplay" />
+        <ImageView
+            android:id="@+id/btn_menu"
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:padding="0px"
+            android:src="@drawable/menu_icon"
+            android:visibility="visible" />
+    </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/ibOurProducts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:padding="2dp"
-            android:src="@drawable/icon_share" />
-
-        <ImageButton
-            android:id="@+id/ibBanglaDua"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:padding="2dp"
-            android:src="@drawable/icon_contactus" />
-    </LinearLayout>
+    <View
+        android:id="@+id/drop_shadowView"
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:layout_below="@+id/header"
+        android:background="@drawable/drop_shadow" />
 
     <LinearLayout
         android:id="@+id/layoutBorder1"
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:layout_below="@+id/lnlIButton"
+        android:layout_below="@+id/header"
         android:background="#FF00FFFF"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
 
     <fragment
         android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutBorder1"
-        class="com.google.android.gms.maps.SupportMapFragment" />
+        android:layout_below="@+id/header" />
 
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/layoutBorder" >
+        android:layout_above="@+id/layoutBorder">
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView1"
@@ -74,190 +81,222 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-1982840936615923/9609534095" >
-        </com.google.android.gms.ads.AdView>
+            ads:adUnitId="ca-app-pub-1982840936615923/9609534095"></com.google.android.gms.ads.AdView>
     </LinearLayout>
 
-    <LinearLayout
+    <View
         android:id="@+id/layoutBorder"
-        android:layout_width="fill_parent"
-        android:layout_height="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="3px"
         android:layout_above="@+id/list"
-        android:background="#00ccff"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:background="@drawable/drop_shadow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="230px"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.5"
+        android:background="@color/white"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#000000" >
+        android:layout_alignParentBottom="true">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbars="none" >
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_height="230px"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_airport"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/airport" />
 
                 <Button
                     android:id="@+id/btn_atm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/atm" />
 
                 <Button
                     android:id="@+id/btn_bank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/bank" />
 
                 <Button
                     android:id="@+id/btn_doctor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/doctor" />
 
                 <Button
                     android:id="@+id/btn_restaurant"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/restaurant" />
 
                 <Button
                     android:id="@+id/btn_mosque"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/mosque" />
 
                 <Button
                     android:id="@+id/btn_church"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/church" />
 
                 <Button
                     android:id="@+id/btn_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/bar" />
 
                 <Button
                     android:id="@+id/btn_car_repair"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/car_repair" />
 
                 <Button
                     android:id="@+id/btn_departmental_store"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/department_store" />
 
                 <Button
                     android:id="@+id/btn_fire_station"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/fire_station" />
 
                 <Button
                     android:id="@+id/btn_food"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/food" />
 
                 <Button
                     android:id="@+id/btn_gas_station"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/gas_station" />
 
                 <Button
                     android:id="@+id/btn_gym"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/gym" />
 
                 <Button
                     android:id="@+id/btn_hospital"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/hospital" />
 
                 <Button
                     android:id="@+id/btn_police"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/police" />
 
                 <Button
                     android:id="@+id/btn_post_office"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/post_office" />
 
                 <Button
                     android:id="@+id/btn_school"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/school" />
 
                 <Button
                     android:id="@+id/btn_shopping"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/shopping" />
 
                 <Button
                     android:id="@+id/btn_stadium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/stadium" />
 
                 <Button
                     android:id="@+id/btn_store"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/store" />
 
                 <Button
                     android:id="@+id/btn_taxi_stand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/taxi_stand" />
 
                 <Button
                     android:id="@+id/btn_train_station"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/train_station" />
 
                 <Button
                     android:id="@+id/btn_university"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/university" />
 
                 <Button
                     android:id="@+id/btn_zoo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/zoo" />
 
                 <Button
                     android:id="@+id/btn_bus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_margin="20px"
                     android:background="@drawable/bus" />
             </LinearLayout>
         </HorizontalScrollView>
@@ -266,12 +305,25 @@
     <Button
         android:id="@+id/btn_list"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="100px"
         android:layout_below="@+id/layoutBorder1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape2"
-        android:padding="10dp"
+        android:layout_marginTop="30px"
+        android:background="@drawable/rounded_corner_border"
+        android:padding="20px"
+        android:textSize="40px"
+        android:tag="40"
         android:text="SWITCH TO LISTVIEW" />
 
+    <ImageView
+        android:id="@+id/btn_back_indicator"
+        android:layout_width="70px"
+        android:layout_height="70px"
+        android:layout_marginRight="30px"
+        android:layout_toRightOf="@id/btn_list"
+        android:padding="0px"
+        android:layout_below="@+id/layoutBorder1"
+        android:layout_marginTop="30px"
+        android:src="@drawable/back_icon"
+        android:visibility="visible" />
 </RelativeLayout>

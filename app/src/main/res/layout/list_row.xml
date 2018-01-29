@@ -31,18 +31,19 @@
                     android:text="Name"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#ffc600"
-                    android:textSize="20dp" />
+                    android:textSize="60px" android:tag="55" />
 
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="85dp"
+                    android:layout_marginLeft="200px"
                     android:layout_marginRight="20dp"
                     android:text="Road 17, Banani Dhaka"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#3B3131"
-                    android:textSize="15dp" />
+                    android:layout_marginTop="10px"
+                    android:textSize="50px" android:tag="45"/>
             </FrameLayout>
 
             <FrameLayout
@@ -53,20 +54,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:text="address"
+                    android:text="Address"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#ffc600"
-                    android:textSize="20dp" />
+                    android:textSize="60px" android:tag="55" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="90dp"
+                    android:layout_marginLeft="250px"
                     android:text="Road 17, Banani Dhaka"
+                    android:layout_marginTop="10px"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#3B3131"
-                    android:textSize="15dp" />
+                    android:textSize="50px" android:tag="45" />
             </FrameLayout>
 
             <FrameLayout
@@ -80,7 +82,7 @@
                     android:text="Rating"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#ffc600"
-                    android:textSize="20dp" />
+                    android:textSize="60px" android:tag="55" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -92,17 +94,16 @@
                     android:text="Instruction"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#3B3131"
-                    android:textSize="16dp"
+                    android:textSize="60px" android:tag="55"
                     android:visibility="gone" />
 
                 <RatingBar
                     android:id="@+id/ratingBar1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
+                    android:layout_marginLeft="180px"
                     android:numStars="4"
                     android:paddingLeft="5dp"
-                   
                     android:rating="1.0"
                     android:stepSize="1.0" />
 
@@ -138,7 +139,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/btn_green_bg"
             android:gravity="center"
             android:padding="7dp"
